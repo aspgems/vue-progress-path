@@ -16,11 +16,18 @@ const plugin = {
 	// eslint-disable-next-line no-undef
 	version: VERSION,
 	install (Vue, options) {
-		globalOptions = Object.assign({}, {
-			installComponents: true,
-			componentsPrefix: 'loading-',
-			defaultShape: 'circle',
-		}, options)
+
+	  globalOptions = {
+      installComponents: true,
+      componentsPrefix: 'loading-',
+      defaultShape: 'circle',
+    };
+
+	  if (options){
+      for (var key in options) {
+        globalOptions[key] = options[key];
+      }
+    }
 
 		if (globalOptions.installComponents) {
 			registerComponents(Vue, globalOptions.componentsPrefix)
